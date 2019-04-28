@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - GameMaster
+  - LevelManager
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PostProcessing
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3132761269
+    locked: 0
+  - name: Props
+    uniqueID: 3832856935
+    locked: 0
+  - name: People
+    uniqueID: 878872089
+    locked: 0
+  - name: Entities
+    uniqueID: 3126860145
+    locked: 0
+  - name: Player
+    uniqueID: 2036054473
+    locked: 0
+  - name: Held
+    uniqueID: 478311111
+    locked: 0
+  - name: Foreground
+    uniqueID: 3273265291
+    locked: 0
+  - name: UI
+    uniqueID: 1963044039
+    locked: 0

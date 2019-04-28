@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Level_0.unity
+    guid: d45693797a2abd04395694306a705be0
+  - enabled: 1
+    path: Assets/Scenes/Endgame.unity
+    guid: 3d6fcc6bec38fc645bb08f0ab508e098
+  m_configObjects: {}
