@@ -2,7 +2,7 @@
 
 using AlexaRun.ScriptableObjects;
 namespace AlexaRun.Behaviours {
-    class ItemBehaviour : MonoBehaviour
+    public class ItemBehaviour : MonoBehaviour
     {
         [SerializeField] private ItemDefinition itemDefinition;
         public ItemDefinition ItemDefinition {

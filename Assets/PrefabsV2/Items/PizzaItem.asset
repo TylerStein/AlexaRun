@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Pizza
   texture: {fileID: 21300000, guid: 95df67578594adf4897eb3429997153f, type: 3}
+  itemStackHeight: 0.1
+  maxHorizontalOffset: 0.05
+  maxRotationalOffset: 4

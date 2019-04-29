@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-
 using AlexaRun.ScriptableObjects;
+
 namespace AlexaRun.Behaviours
 {
     public class SoundEffectBehaviour : MonoBehaviour

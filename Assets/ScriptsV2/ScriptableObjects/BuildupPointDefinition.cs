@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+using AlexaRun.Interfaces;
 namespace AlexaRun.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "New Buildup Point Defenition", menuName = "Alexa Run/Buildup Point Definition")]
