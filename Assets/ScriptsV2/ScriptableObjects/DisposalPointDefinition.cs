@@ -8,6 +8,7 @@ namespace AlexaRun.ScriptableObjects
     {
         public ItemSet allowedItems;
         public bool allowAll;
+        public float cooldown = 0f;
 
         public bool IsItemAllowed(ItemDefinition item) {
             if (allowAll) return true;

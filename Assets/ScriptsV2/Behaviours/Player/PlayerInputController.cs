@@ -3,6 +3,9 @@ using UnityEngine.Events;
 
 namespace AlexaRun.Behaviours.Player
 {
+    /// <summary>
+    /// Normalizes inputs for passing to the Player Behaviour, to be used by a PlayerBehaviour script
+    /// </summary>
     public class PlayerInputController : MonoBehaviour {
         [SerializeField] private string interactInputName = "Fire1";
         [SerializeField] private string horizontalAxisName = "Horizontal";

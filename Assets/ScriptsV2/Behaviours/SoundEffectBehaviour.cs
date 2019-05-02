@@ -3,10 +3,14 @@ using AlexaRun.ScriptableObjects;
 
 namespace AlexaRun.Behaviours
 {
+    /// <summary>
+    /// A generalized wrapper for playing sounds with variation to their volume and pitch based on given settings.
+    /// This handles limits set by the audio portion the user's GameSettings
+    /// </summary>
     public class SoundEffectBehaviour : MonoBehaviour
     {
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private SoundEffectSettings settings;
+        [SerializeField] private AudioSource audioSource = null;
+        [SerializeField] private SoundEffectSettings settings = null;
 
         private bool isPaused = false;
 

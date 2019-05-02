@@ -5,16 +5,20 @@ using AlexaRun.Interfaces;
 
 namespace AlexaRun.Behaviours
 {
-    class ModifierPointBehaviour : MonoBehaviour, IPointBehaviour
+    /// <summary>
+    /// A Point Behaviour that can receive a set of items and output a specific item, with a cooldown
+    /// </summary>
+    class ModifierPointBehaviour : PointBehaviour
     {
         [SerializeField] private ModifierPointDefinition definition;
+        [SerializeField] [ReadOnly] bool isEnabled = true;
 
-        public bool OnInteract(PlayerBehaviour player) {
+        public override bool OnInteract(PlayerBehaviour player) {
             return false;
         }
 
-        public GameObject GetGameObject() {
-            return gameObject;
+        public override void SetEnabled(bool enabled) {
+            isEnabled = enabled;
         }
     }
 }

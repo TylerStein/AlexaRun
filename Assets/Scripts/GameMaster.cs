@@ -10,7 +10,7 @@ public class GameMaster : MonoBehaviour
     public bool paused = true;
     public GameObject preGameOverlay;
 
-    public Camera camera;
+    new public Camera camera;
     public List<Room> rooms = new List<Room>();
 
     public int currentScore = 0;

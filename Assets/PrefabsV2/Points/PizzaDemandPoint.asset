@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PizzaDemandPoint
   m_EditorClassIdentifier: 
   demandItem: {fileID: 11400000, guid: 51d03d668c1bfdb40a0a6aee6a4465a0, type: 2}
-  baseDepletionPerSecond: 1
+  baseDepletionPerSecond: 0.8
   baseFailStateTimeout: 2
   maxStackItems: 10
   initialStackItemCount: 5

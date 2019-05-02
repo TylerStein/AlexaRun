@@ -5,21 +5,31 @@ using AlexaRun.Interfaces;
 using AlexaRun.Level;
 using AlexaRun.ScriptableObjects;
 using AlexaRun.Behaviours.Player;
+using AlexaRun.Enums;
+using AlexaRun.Global;
 
 namespace AlexaRun.Behaviours
 {
-    class DemandPointBehaviour : MonoBehaviour, IPointBehaviour
+    /// <summary>
+    /// A Failable Point Behaviour that drains a stack of items and can fail after the stack is empty
+    /// </summary>
+    class DemandPointBehaviour : FailablePointBehaviour
     {
-        [SerializeField] private Transform stackPositionRoot;
-        [SerializeField] private ItemObjectPool itemPool;
-        [SerializeField] private DemandPointDefinition definition;
+        [SerializeField] private Transform stackPositionRoot = null;
+        [SerializeField] private ItemObjectPool itemPool = null;
+        [SerializeField] private DemandPointDefinition definition = null;
         [SerializeField] private Stack<ItemBehaviour> itemStack = new Stack<ItemBehaviour>();
+        [SerializeField] private UnityEvent onStateChange = new UnityEvent();
+        [SerializeField] [ReadOnly] private float pointTimer = 0f;
+        [SerializeField] [ReadOnly] private EBehaviourState state = EBehaviourState.OK;
+        [SerializeField] [ReadOnly] bool isEnabled = true;
 
-        private float consumeCounter = 0f;
-
-        public bool OnInteract(PlayerBehaviour player) {
+        public override bool OnInteract(PlayerBehaviour player) {
             ItemBehaviour item = player.PeekItemStack();
-            if (itemStack.Count < definition.maxStackItems && item != null && definition.demandItem == item.ItemDefinition) {
+            if (isEnabled && state != EBehaviourState.FAILED 
+                && itemStack.Count < definition.maxStackItems 
+                && item != null
+                && definition.demandItem == item.ItemDefinition) {
                 pushItemToStack(player.PopItemStack());
                 return true;
             }
@@ -27,12 +37,24 @@ namespace AlexaRun.Behaviours
             return false;
         }
 
-        public GameObject GetGameObject() {
-            return gameObject;
+        public override void SetEnabled(bool enabled) {
+            isEnabled = enabled;
+        }
+
+        public override void SubscribeToStateChange(UnityAction listener) {
+            onStateChange.AddListener(listener);
+        }
+
+        public override void UnsubscribeFromStateChange(UnityAction listener) {
+            onStateChange.RemoveListener(listener);
+        }
+
+        public override EBehaviourState GetBehaviourState() {
+            return state;
         }
 
         private void Update() {
-            updatePointState(Time.deltaTime);
+            updatePointBehaviour(Time.deltaTime);
         }
 
         private void Awake() {
@@ -52,32 +74,47 @@ namespace AlexaRun.Behaviours
             }
         }
 
-        private void updatePointState(float deltaTime) {
-            float timeTarget = 1.0f / definition.baseDepletionPerSecond;
-            consumeCounter += deltaTime;
-            while (consumeCounter >= timeTarget) {
-                consumeCounter -= timeTarget;
-                removeItemFromStack();
+        private void updatePointBehaviour(float deltaTime) {
+            if (state == EBehaviourState.FAILED || isEnabled == false) {
+                return;
+            } else if (state == EBehaviourState.OK) {
+                float timeTarget = 1.0f / definition.baseDepletionPerSecond;
+                pointTimer += deltaTime;
+                while (pointTimer >= timeTarget) {
+                    pointTimer -= timeTarget;
+                    removeItemFromStack();
+                }
+            } else if (state == EBehaviourState.FAILING) {
+                pointTimer += Time.deltaTime;
+                if (pointTimer >= definition.baseFailStateTimeout) {
+                    state = EBehaviourState.FAILED;
+                    onStateChange.Invoke();
+                }
             }
         }
 
         private void removeItemFromStack(bool invokeMessage = true) {
-            if (itemStack.Count == 0) {
-                handleEmptyStack();
-            } else {
-                itemPool.ReturnToPool(itemStack.Pop());
+            int stackCount = itemStack.Count;
+            if (stackCount > 0) itemPool.ReturnToPool(itemStack.Pop());
+
+            if ((stackCount - 1) <= 0 && state != EBehaviourState.FAILING) {
+                state = EBehaviourState.FAILING;
+                pointTimer = 0;
+                onStateChange.Invoke();
             }
         }
 
         private void pushItemToStack(ItemBehaviour item) {
+            item.SetSpriteLayer(Settings.instance.itemSortingLayer);
+            item.SetSpriteLayerOrder(itemStack.Count + 1);
             item.transform.SetParent(stackPositionRoot);
             item.transform.localPosition = item.ItemDefinition.GenerateItemStackPosition(itemStack.Count, true);
             item.transform.localRotation = item.ItemDefinition.GenerateItemStackRotation(true);
             itemStack.Push(item);
-        }
-
-        private void handleEmptyStack() {
-            //
+            if (state == EBehaviourState.FAILING) {
+                state = EBehaviourState.OK;
+                onStateChange.Invoke();
+            }
         }
     }
 }

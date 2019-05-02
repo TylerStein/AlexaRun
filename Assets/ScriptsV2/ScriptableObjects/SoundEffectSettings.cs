@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using AlexaRun.Enums;
 
 namespace AlexaRun.ScriptableObjects
 {
@@ -8,7 +9,8 @@ namespace AlexaRun.ScriptableObjects
     {
         [SerializeField] private List<AudioClip> audioClips = new List<AudioClip>();
 
-        [SerializeField] private bool loop;
+        [SerializeField] private ESoundEffectType soundEffectType = ESoundEffectType.GENERAL;
+        [SerializeField] private bool loop = false;
 
         [SerializeField] private float minVolume = 0.98f;
         [SerializeField] private float maxVolume = 1.0f;

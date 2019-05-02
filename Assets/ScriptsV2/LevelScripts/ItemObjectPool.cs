@@ -63,6 +63,7 @@ namespace AlexaRun.Level
 
             assertKeyExists(definition.itemName);
 
+            inObject.SetSpriteLayerOrder(0);
             inObject.transform.SetParent(poolRoot);
             inObject.transform.localPosition = Vector3.zero;
             inObject.transform.localRotation = Quaternion.identity;
