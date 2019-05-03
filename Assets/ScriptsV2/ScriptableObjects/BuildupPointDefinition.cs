@@ -7,6 +7,9 @@ namespace AlexaRun.ScriptableObjects
     public class BuildupPointDefinition : ScriptableObject
     {
         public ItemDefinition accumulatingItem;
+        public int initialStackItemCount;
+        public int maxStackItemCount;
         public float baseAccumulationPerSecond;
+        public float baseFailStateTimeout;
     }
 }

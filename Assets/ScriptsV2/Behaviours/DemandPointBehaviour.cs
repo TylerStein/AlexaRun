@@ -113,6 +113,7 @@ namespace AlexaRun.Behaviours
             itemStack.Push(item);
             if (state == EBehaviourState.FAILING) {
                 state = EBehaviourState.OK;
+                pointTimer = 0;
                 onStateChange.Invoke();
             }
         }
