@@ -107,16 +107,9 @@ namespace AlexaRun.Behaviours
             item.transform.localRotation = item.ItemDefinition.GenerateItemStackRotation(true);
             itemStack.Push(item);
 
-            if (itemStack.Count >= definition.maxStackItemCount) {
-                if (state == EBehaviourState.OK) {
-                    state = EBehaviourState.FAILING;
-                    pointTimer = 0;
-                    onStateChange.Invoke();
-                }
-            }
-
-            if (state == EBehaviourState.FAILING) {
-                state = EBehaviourState.OK;
+            if (state == EBehaviourState.OK && itemStack.Count >= definition.maxStackItemCount) {
+                state = EBehaviourState.FAILING;
+                pointTimer = 0;
                 onStateChange.Invoke();
             }
         }

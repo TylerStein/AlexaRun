@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using AlexaRun.ScriptableObjects;
 using AlexaRun.Interfaces;
 using AlexaRun.Behaviours.Player;
@@ -10,6 +11,9 @@ namespace AlexaRun.Behaviours
     /// </summary>
     class DisposalPointBehaviour : PointBehaviour
     {
+        [SerializeField] public UnityEvent OnDisposal = new UnityEvent();
+        [SerializeField] public UnityEvent OnAvailable = new UnityEvent();
+
         [SerializeField] private DisposalPointDefinition definition = null;
         [SerializeField] [ReadOnly] private float disposalCooldownTimer = 0f;
         [SerializeField] [ReadOnly] private bool isEnabled = true;
@@ -37,12 +41,16 @@ namespace AlexaRun.Behaviours
 
             if (disposalCooldownTimer > 0f) {
                 disposalCooldownTimer -= deltaTime;
-                if (disposalCooldownTimer < 0f) disposalCooldownTimer = 0f;
+                if (disposalCooldownTimer <= 0f) {
+                    disposalCooldownTimer = 0f;
+                    OnAvailable.Invoke();
+                }
             }
         }
 
         private void disposeItem(ItemBehaviour item) {
             disposalCooldownTimer = definition.cooldown;
+            OnDisposal.Invoke();
             Destroy(item.gameObject);
         }
     }

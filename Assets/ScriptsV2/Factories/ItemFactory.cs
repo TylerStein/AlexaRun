@@ -11,10 +11,12 @@ namespace AlexaRun.Factories
     {
         [SerializeField] public string itemSortingLayer = "Entities";
 
+        private System.Type[] itemComponentTypes = { typeof(ItemBehaviour), typeof(SpriteRenderer) };
+
         public ItemBehaviour CreateItem(ItemDefinition itemDefinition) {
-            GameObject itemObject = new GameObject();
-            ItemBehaviour itemBehaviour = itemObject.AddComponent<ItemBehaviour>();
-            SpriteRenderer spriteRenderer = itemObject.AddComponent<SpriteRenderer>();
+            GameObject itemObject = new GameObject("New " + itemDefinition.itemName, itemComponentTypes);
+            ItemBehaviour itemBehaviour = itemObject.GetComponent<ItemBehaviour>();
+            SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
             spriteRenderer.sortingLayerName = itemSortingLayer;
             spriteRenderer.sprite = itemDefinition.texture;
             itemBehaviour.ItemDefinition = itemDefinition;
