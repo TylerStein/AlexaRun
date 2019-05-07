@@ -27,6 +27,7 @@ namespace AlexaRun.Behaviours
         public override bool OnInteract(PlayerBehaviour player) {
             if (isEnabled && player.HasStackSpace() && itemStack.Count > 0) {
                 player.PushItemStack(removeItemFromStack());
+                return true;
             }
 
             return false;

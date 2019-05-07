@@ -4,7 +4,7 @@ namespace AlexaRun.Global
 {
     public class Settings : MonoBehaviour
     {
-        [SerializeField] private SettingsDefinition settingsDefinition;
+        [SerializeField] private SettingsDefinition settingsDefinition = null;
 
         public static SettingsDefinition instance;
 

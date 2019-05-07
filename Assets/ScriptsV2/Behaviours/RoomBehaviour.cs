@@ -14,6 +14,7 @@ namespace AlexaRun.Behaviours
         [SerializeField] private List<FailablePointBehaviour> trackedPoints = new List<FailablePointBehaviour>();
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
         [SerializeField] [ReadOnly] private EBehaviourState roomState = EBehaviourState.OK;
+        [SerializeField] private SpriteFadeBehaviour roomFailingSpriteBehaviour = null;
 
         [SerializeField] [ReadOnly] private bool isEnabled = true;
 
@@ -60,14 +61,19 @@ namespace AlexaRun.Behaviours
             if (failCount == trackedPoints.Count) {
                 // All points in room failed, kill room
                 roomState = EBehaviourState.FAILED;
+                roomFailingSpriteBehaviour.DisablePingPong();
+                roomFailingSpriteBehaviour.SetTargetAlpha(1);
                 onStateChange.Invoke();
             } else if (roomState == EBehaviourState.OK && failing) {
                 // Room became failing
                 roomState = EBehaviourState.FAILING;
+                roomFailingSpriteBehaviour.EnablePingPong();
                 onStateChange.Invoke();
             } else if (roomState == EBehaviourState.FAILING && !failing) {
                 // Room was failing and is OK now
                 roomState = EBehaviourState.OK;
+                roomFailingSpriteBehaviour.DisablePingPong();
+                roomFailingSpriteBehaviour.SetTargetAlpha(0);
                 onStateChange.Invoke();
             }
         }

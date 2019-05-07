@@ -8,7 +8,7 @@ namespace AlexaRun.Behaviours
     {
         [SerializeField] public List<Sprite> sprites = new List<Sprite>();
         [SerializeField] [ReadOnly] private int activeSpriteIndex = 0;
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer spriteRenderer = null;
 
 
         public void SetActiveSpriteIndex(int index) {
