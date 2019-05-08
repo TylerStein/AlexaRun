@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: d9495ac331d06224a82bbeebda8f3fa9
+guid: 88c7b2002c996a34193e150686a65050
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4752630108371935690
-    second: laundry_closed
-  - first:
-      213: -5206473286881289300
+      213: -2556001300664340683
     second: laundry_open
+  - first:
+      213: 2682040270588277676
+    second: laundry_closed
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -90,7 +90,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: laundry_closed
+      name: laundry_open
       rect:
         serializedVersion: 2
         x: 0
@@ -98,20 +98,20 @@ TextureImporter:
         width: 1024
         height: 1024
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e3d437732d6a1f439f0228cd36b3668
-      internalID: -4752630108371935690
+      spriteID: 74348ba9f6dbe374ab70ae6afc969921
+      internalID: -2556001300664340683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: laundry_open
+      name: laundry_closed
       rect:
         serializedVersion: 2
         x: 1024
@@ -119,14 +119,14 @@ TextureImporter:
         width: 1024
         height: 1024
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 217ab90f8fd79be46b678fd06c776ae1
-      internalID: -5206473286881289300
+      spriteID: 8b78f92f3e9db4948b00ade161ffdaf5
+      internalID: 2682040270588277676
       vertices: []
       indices: 
       edges: []
@@ -134,7 +134,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: fdb1972a807545f44b1c6ac49478e74e
+    spriteID: ce84e0eb997628a458df3b6443e05576
     internalID: 0
     vertices: []
     indices: 

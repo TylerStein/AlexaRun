@@ -8,7 +8,7 @@ namespace AlexaRun.Interfaces
     /// </summary>
     public abstract class PointBehaviour : MonoBehaviour
     {
-        public abstract bool OnInteract(PlayerBehaviour playerHeldStack);
+        public abstract bool OnInteract(PlayerBehaviour playerBehaviour);
         public abstract void SetEnabled(bool enabled);
 
         protected PointBehaviour() {

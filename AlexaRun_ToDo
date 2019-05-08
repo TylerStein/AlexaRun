@@ -1,0 +1,13 @@
+// AlexaRun //
+
+Try modifier point for its own sake
+	> Show stack of Input
+	> Trigger when Input complete
+	> Delay
+	> Spawn Output
+	( Two different transform roots for I / O stacks)
+	
+> Score accumulation
+> Score display
+> Level failure
+> Better indicator of stack state (fill bar ticks?)

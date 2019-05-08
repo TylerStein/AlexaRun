@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using AlexaRun.Behaviours;
 using AlexaRun.Behaviours.Player;
 using AlexaRun.Enums;
 using AlexaRun.Interfaces;
-using UnityEngine.Events;
+using AlexaRun.Structures;
 
 namespace AlexaRun.Level
 {
@@ -15,8 +16,11 @@ namespace AlexaRun.Level
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
         [SerializeField] [ReadOnly] private EBehaviourState levelState = EBehaviourState.OK;
 
+        [SerializeField] public LevelBoundaries boundaries;
+        public LevelBoundaries Boundaries { get { return boundaries; } }
+
         private static LevelBehaviour levelBehaviourInstance = null;
-        static LevelBehaviour Instance() {
+        public static LevelBehaviour Instance() {
             return levelBehaviourInstance;
         }
 
@@ -59,6 +63,21 @@ namespace AlexaRun.Level
 
         public EBehaviourState GetBehaviourState() {
             return levelState;
+        }
+
+        private void OnDrawGizmos() {
+            Gizmos.color = Color.green;
+
+            Vector3 top = new Vector3(Boundaries.minX, 20, 0);
+            Vector3 bottom = new Vector3(Boundaries.minX, -20, 0);
+
+            Gizmos.DrawLine(top, bottom);
+
+            top.Set(Boundaries.maxX, 20, 0);
+            bottom.Set(Boundaries.maxX, -20, 0);
+
+            Gizmos.DrawLine(top, bottom);
+
         }
     }
 }

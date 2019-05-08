@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AlexaRun.ScriptableObjects;
 using AlexaRun.Interfaces;
 using AlexaRun.Global;
+using AlexaRun.Level;
 
 namespace AlexaRun.Behaviours.Player
 {
@@ -19,33 +20,12 @@ namespace AlexaRun.Behaviours.Player
         [SerializeField] private PlayerSettings playerSettings = null;
         [SerializeField] private Stack<ItemBehaviour> itemStack = new Stack<ItemBehaviour>();
         [SerializeField] private Transform stackHoldRoot = null;
+        [SerializeField] private LevelBehaviour levelBehaviour = null;
 
         private bool isEnabled = true;
 
         public UnityEvent OnFailedInteraction = new UnityEvent();
         public UnityEvent OnSuccessfulInteraction = new UnityEvent();
-
-        private void Update() {
-            if (isEnabled == false) return;
-
-            if (inputController.Interact) {
-                PointBehaviour nearestPoint = proximityController.NearestPoint;
-                if (nearestPoint != null) {
-                    bool success = nearestPoint.OnInteract(this);
-                    if (success) OnSuccessfulInteraction.Invoke();
-                    else OnFailedInteraction.Invoke();
-                } else {
-                    OnFailedInteraction.Invoke();
-                }
-            }
-
-            transform.Translate(inputController.HorizontalMove * Vector3.right * Time.deltaTime * playerSettings.baseMetersPerSecond);
-
-            soundEffectController.SetMovement(inputController.HorizontalMove);
-            animationController.SetMovement(inputController.HorizontalMove);
-            animationController.SetStackSize(itemStack.Count);
-            animationController.UpdateAnimatorValues();
-        }
 
         public void SetEnabled(bool enabled) {
             animationController.SetGameOver(isEnabled == false);
@@ -86,6 +66,31 @@ namespace AlexaRun.Behaviours.Player
 
         private void Awake() {
             if (stackHoldRoot == null) stackHoldRoot = transform;
+            levelBehaviour = LevelBehaviour.Instance();
+        }
+
+        private void Update() {
+            if (isEnabled == false) return;
+
+            if (inputController.Interact) {
+                PointBehaviour nearestPoint = proximityController.NearestPoint;
+                if (nearestPoint != null) {
+                    bool success = nearestPoint.OnInteract(this);
+                    if (success) OnSuccessfulInteraction.Invoke();
+                    else OnFailedInteraction.Invoke();
+                } else {
+                    OnFailedInteraction.Invoke();
+                }
+            }
+
+            Vector3 projectedPosition = transform.position + (inputController.HorizontalMove * Vector3.right * Time.deltaTime * playerSettings.baseMetersPerSecond);
+            projectedPosition.x = Mathf.Clamp(projectedPosition.x, levelBehaviour.Boundaries.minX, levelBehaviour.Boundaries.maxX);
+            transform.Translate(projectedPosition - transform.position);
+
+            soundEffectController.SetMovement(inputController.HorizontalMove);
+            animationController.SetMovement(inputController.HorizontalMove);
+            animationController.SetStackSize(itemStack.Count);
+            animationController.UpdateAnimatorValues();
         }
     }
 }
