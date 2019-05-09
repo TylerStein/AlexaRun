@@ -7,6 +7,7 @@ using AlexaRun.ScriptableObjects;
 using AlexaRun.Behaviours.Player;
 using AlexaRun.Enums;
 using AlexaRun.Global;
+using AlexaRun.Behaviours.UI;
 
 namespace AlexaRun.Behaviours
 {
@@ -23,6 +24,8 @@ namespace AlexaRun.Behaviours
         [SerializeField] [ReadOnly] private float pointTimer = 0f;
         [SerializeField] [ReadOnly] private EBehaviourState state = EBehaviourState.OK;
         [SerializeField] [ReadOnly] bool isEnabled = true;
+
+        [SerializeField] public ProgressBarBehaviour progressBarBehaviour;
 
         public override bool OnInteract(PlayerBehaviour player) {
             ItemBehaviour item = player.PeekItemStack();
@@ -72,6 +75,7 @@ namespace AlexaRun.Behaviours
                     pushItemToStack(newItem);
                 }
             }
+            progressBarBehaviour.SetTicks(itemStack.Count);
         }
 
         private void updatePointBehaviour(float deltaTime) {
@@ -102,6 +106,7 @@ namespace AlexaRun.Behaviours
                 pointTimer = 0;
                 onStateChange.Invoke();
             }
+            progressBarBehaviour.SetTicks(itemStack.Count);
         }
 
         private void pushItemToStack(ItemBehaviour item) {
@@ -116,6 +121,7 @@ namespace AlexaRun.Behaviours
                 pointTimer = 0;
                 onStateChange.Invoke();
             }
+            progressBarBehaviour.SetTicks(itemStack.Count);
         }
     }
 }

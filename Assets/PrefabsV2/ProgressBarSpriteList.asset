@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e63c09c7e503cf4dbf2f6811d3e1eb0, type: 3}
+  m_Name: ProgressBarSpriteList
+  m_EditorClassIdentifier: 
+  VerticalOffset: 0.25
+  CapBottomEmpty: {fileID: 21300000, guid: a4b6425f2b217bd4fa8f6e3e78b9d9c2, type: 3}
+  CapBottomFull: {fileID: 21300000, guid: a9e1d13066b3ca249bfee1c6bc3c891c, type: 3}
+  CapTopEmpty: {fileID: 21300000, guid: 2187480c57e871340819ee2f61969d6e, type: 3}
+  CapTopFull: {fileID: 21300000, guid: 90fe552aa20b83c4eaae4effc6eef462, type: 3}
+  BodyEmpty: {fileID: 21300000, guid: 2cdce86c01b2b504b902586beacca1c8, type: 3}
+  BodyFull: {fileID: 21300000, guid: a0ecba50f4695f648b571fc033614a21, type: 3}
