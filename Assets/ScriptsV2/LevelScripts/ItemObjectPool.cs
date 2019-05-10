@@ -63,6 +63,8 @@ namespace AlexaRun.Level
 
             assertKeyExists(definition.itemName);
 
+            Debug.Log("returned to pool", inObject.gameObject);
+
             inObject.SetSpriteLayerOrder(0);
             inObject.transform.SetParent(poolRoot);
             inObject.transform.localPosition = Vector3.zero;

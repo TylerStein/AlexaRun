@@ -8,9 +8,9 @@ namespace AlexaRun.Behaviours
     [RequireComponent(typeof(Collider2D))]
     public class StairsTeleportBehaviour : PointBehaviour
     {
-        [SerializeField] private StairsTeleportBehaviour destination;
-        [SerializeField] private SoundEffectBehaviour teleportSoundEffect;
-        [SerializeField] private SpriteIndicatorBehaviour teleportSpriteIndicator;
+        [SerializeField] private StairsTeleportBehaviour destination = null;
+        [SerializeField] private SoundEffectBehaviour teleportSoundEffect = null;
+        [SerializeField] private SpriteIndicatorBehaviour teleportSpriteIndicator = null;
         [SerializeField] private string playerTag = "Player";
 
         public override bool OnInteract(PlayerBehaviour playerBehaviour) {

@@ -8,8 +8,8 @@ namespace AlexaRun.Behaviours.UI
 {
     public class ProgressBarBehaviour : MonoBehaviour
     {
-        [SerializeField] private SettingsDefinition gameSettings;
-        [SerializeField] private ProgressBarSpriteList sprites;
+        [SerializeField] private SettingsDefinition gameSettings = null;
+        [SerializeField] private ProgressBarSpriteList sprites = null;
         [SerializeField] private Transform stackRoot = null;
         [SerializeField] private int maxTicks = 10;
         [SerializeField] private int currentTicks = 0;

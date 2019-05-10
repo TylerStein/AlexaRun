@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DefaultPlayerSettings
   m_EditorClassIdentifier: 
   holdStackLimit: 3
-  baseMetersPerSecond: 4
+  baseMetersPerSecond: 8

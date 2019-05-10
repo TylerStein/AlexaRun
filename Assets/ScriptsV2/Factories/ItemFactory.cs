@@ -17,6 +17,7 @@ namespace AlexaRun.Factories
             GameObject itemObject = new GameObject("New " + itemDefinition.itemName, itemComponentTypes);
             ItemBehaviour itemBehaviour = itemObject.GetComponent<ItemBehaviour>();
             SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
+            itemBehaviour.Awake();
             spriteRenderer.sortingLayerName = itemSortingLayer;
             spriteRenderer.sprite = itemDefinition.texture;
             itemBehaviour.ItemDefinition = itemDefinition;

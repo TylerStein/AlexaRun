@@ -33,12 +33,9 @@ namespace AlexaRun.Behaviours {
             spriteRenderer.sortingOrder = order;
         }
 
-        private void OnEnable() {
-            if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-
-        private void Awake() {
+        public void Awake() {
             if (itemDefinition != null) OnUpdateItemDefinition();
+            if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         private void OnUpdateItemDefinition() {

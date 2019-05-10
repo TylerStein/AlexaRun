@@ -11,3 +11,14 @@ Try modifier point for its own sake
 > Score display
 > Level failure
 > Better indicator of stack state (fill bar ticks?)
+
+////////////
+
+Match animations to consumption/buildup speeds
+Pizza_Dude Base
+	5:06 Seconds
+	1 / 5.06 = 0.19
+	
+Animation Speed comes form Variable
+
+ChangePerSecond = (1 / BaseAnimationTime) * Multiplier

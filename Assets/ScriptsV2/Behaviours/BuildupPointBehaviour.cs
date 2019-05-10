@@ -20,6 +20,8 @@ namespace AlexaRun.Behaviours
         [SerializeField] private BuildupPointDefinition definition = null;
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
         [SerializeField] private Stack<ItemBehaviour> itemStack = new Stack<ItemBehaviour>();
+        [SerializeField] private PointAnimationDefinition animationDefinition = null;
+        [SerializeField] private Animator animator = null;
         [SerializeField] [ReadOnly] private float pointTimer = 0;
         [SerializeField] [ReadOnly] private EBehaviourState state = EBehaviourState.OK;
         [SerializeField] [ReadOnly] bool isEnabled = true;
@@ -55,6 +57,8 @@ namespace AlexaRun.Behaviours
 
         private void Awake() {
             if (stackPositionRoot == null) stackPositionRoot = transform;
+           // float speed = definition.baseAccumulationPerSecond / (1 / animationDefinition.baseAnimationCycleTime);
+           // animator.SetFloat("speed", speed);
             initializeStackContent();
         }
 
@@ -81,6 +85,7 @@ namespace AlexaRun.Behaviours
                 pointTimer += Time.deltaTime;
                 if (pointTimer >= definition.baseFailStateTimeout) {
                     state = EBehaviourState.FAILED;
+                  //  animator.SetInteger("state", 2);
                     onStateChange.Invoke();
                 }
             }
@@ -92,6 +97,7 @@ namespace AlexaRun.Behaviours
             if (state == EBehaviourState.FAILING && itemStack.Count < definition.maxStackItemCount) {
                 state = EBehaviourState.OK;
                 pointTimer = 0;
+              //  animator.SetInteger("state", 0);
                 onStateChange.Invoke();
             }
 
@@ -111,6 +117,7 @@ namespace AlexaRun.Behaviours
             if (state == EBehaviourState.OK && itemStack.Count >= definition.maxStackItemCount) {
                 state = EBehaviourState.FAILING;
                 pointTimer = 0;
+              //  animator.SetInteger("state", 1);
                 onStateChange.Invoke();
             }
         }

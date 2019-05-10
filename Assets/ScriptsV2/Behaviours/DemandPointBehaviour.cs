@@ -21,11 +21,13 @@ namespace AlexaRun.Behaviours
         [SerializeField] private DemandPointDefinition definition = null;
         [SerializeField] private Stack<ItemBehaviour> itemStack = new Stack<ItemBehaviour>();
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
+        [SerializeField] private PointAnimationDefinition animationDefinition = null;
+        [SerializeField] private Animator animator = null;
         [SerializeField] [ReadOnly] private float pointTimer = 0f;
         [SerializeField] [ReadOnly] private EBehaviourState state = EBehaviourState.OK;
         [SerializeField] [ReadOnly] bool isEnabled = true;
 
-        [SerializeField] public ProgressBarBehaviour progressBarBehaviour;
+        [SerializeField] public ProgressBarBehaviour progressBarBehaviour = null;
 
         public override bool OnInteract(PlayerBehaviour player) {
             ItemBehaviour item = player.PeekItemStack();
@@ -62,6 +64,9 @@ namespace AlexaRun.Behaviours
 
         private void Awake() {
             if (stackPositionRoot == null) stackPositionRoot = transform;
+            float speed = definition.baseDepletionPerSecond / (1 / animationDefinition.baseAnimationCycleTime);
+            Debug.Log("Setting speed to " + speed, gameObject);
+            animator.SetFloat("speed", speed);
             initializeStackContent();
         }
 
@@ -92,6 +97,7 @@ namespace AlexaRun.Behaviours
                 pointTimer += Time.deltaTime;
                 if (pointTimer >= definition.baseFailStateTimeout) {
                     state = EBehaviourState.FAILED;
+                    animator.SetInteger("state", 2);
                     onStateChange.Invoke();
                 }
             }
@@ -103,6 +109,7 @@ namespace AlexaRun.Behaviours
 
             if ((stackCount - 1) <= 0 && state != EBehaviourState.FAILING) {
                 state = EBehaviourState.FAILING;
+                animator.SetInteger("state", 1);
                 pointTimer = 0;
                 onStateChange.Invoke();
             }
@@ -118,6 +125,7 @@ namespace AlexaRun.Behaviours
             itemStack.Push(item);
             if (state == EBehaviourState.FAILING) {
                 state = EBehaviourState.OK;
+                animator.SetInteger("state", 0);
                 pointTimer = 0;
                 onStateChange.Invoke();
             }
