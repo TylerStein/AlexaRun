@@ -78,7 +78,7 @@ namespace AlexaRun.Behaviours
 
         private void pushItemToStack(ItemBehaviour item) {
             if (itemStack.Count >= definition.maxStackItemCount) return;
-            item.SetSpriteLayer(Settings.instance.itemSortingLayer);
+            item.SetSpriteLayer(Settings.Constant.itemSortingLayer);
             item.SetSpriteLayerOrder(itemStack.Count + 1);
             item.transform.SetParent(stackPositionRoot);
             item.transform.localPosition = item.ItemDefinition.GenerateItemStackPosition(itemStack.Count, true);

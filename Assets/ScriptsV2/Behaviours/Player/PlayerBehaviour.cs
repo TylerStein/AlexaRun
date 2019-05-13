@@ -55,7 +55,7 @@ namespace AlexaRun.Behaviours.Player
 
         public bool PushItemStack(ItemBehaviour item) {
             if (itemStack.Count >= playerSettings.holdStackLimit) return false;
-            item.SetSpriteLayer(Settings.instance.heldSortingLayer);
+            item.SetSpriteLayer(Settings.Constant.heldSortingLayer);
             item.SetSpriteLayerOrder(itemStack.Count + 1);
             item.transform.parent = stackHoldRoot;
             item.transform.localPosition = item.ItemDefinition.GenerateItemStackPosition(itemStack.Count, true);

@@ -8,7 +8,6 @@ namespace AlexaRun.Behaviours.UI
 {
     public class ProgressBarBehaviour : MonoBehaviour
     {
-        [SerializeField] private SettingsDefinition gameSettings = null;
         [SerializeField] private ProgressBarSpriteList sprites = null;
         [SerializeField] private Transform stackRoot = null;
         [SerializeField] private int maxTicks = 10;
@@ -86,7 +85,7 @@ namespace AlexaRun.Behaviours.UI
         SpriteRenderer instantiateTick(int index) {
             GameObject tickObject = new GameObject("Tick " + index);
             SpriteRenderer spriteRenderer = tickObject.AddComponent<SpriteRenderer>();
-            spriteRenderer.sortingLayerName = gameSettings.uiSoringLayer;
+            spriteRenderer.sortingLayerName = Settings.Constant.uiSoringLayer;
             float halfHeight = sprites.VerticalOffset * maxTicks / 2f;
             tickObject.transform.position = new Vector3(0, (sprites.VerticalOffset * index) - halfHeight);
             tickObject.transform.SetParent(stackRoot, false);

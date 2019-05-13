@@ -4,14 +4,30 @@ namespace AlexaRun.Global
 {
     public class Settings : MonoBehaviour
     {
-        [SerializeField] private SettingsDefinition settingsDefinition = null;
+        [SerializeField] private InternalSettingsDefinition internalSettingsDefinition = null;
+        [SerializeField] private PersistentSettingsDefinition persistentSettingsDefinition = null;
 
-        public static SettingsDefinition instance;
+        public static InternalSettingsDefinition Constant;
+        public static PersistentSettingsDefinition Persistent;
 
-        private void Awake() {
-            if (settingsDefinition == null) throw new UnityException("Settings behaviour must have a SettingsDefinition set!");
-            if (instance != null) Debug.LogWarning("A Settings instance has already been created and will be replaced. Is there more than one Settings behaviour in the scene?");
-            instance = settingsDefinition;
+        private void OnEnable() {
+            Debug.Log("PersistentSettings : OnEnable");
+            DontDestroyOnLoad(gameObject);
+
+            if (internalSettingsDefinition == null) throw new UnityException("Settings behaviour must have an InternalSettingsDefinition set!");
+            if (persistentSettingsDefinition == null) throw new UnityException("Settings behaviour must have a PersistentSettingsDefinition set!");
+
+            Settings[] existingSettings = GameObject.FindObjectsOfType<Settings>();
+            for (int i = 0; i < existingSettings.Length; i++) {
+                if (existingSettings[i] != this) Destroy(existingSettings[i].gameObject);
+            }
+
+            if (Constant != null || Persistent != null) Debug.LogWarning("A Settings instance has already been created and will be replaced. Is there more than one Settings behaviour in the scene?");
+
+            Constant = internalSettingsDefinition;
+            Persistent = persistentSettingsDefinition;
+
+            Persistent.LoadPlayerPrefs();
         }
     }
 }

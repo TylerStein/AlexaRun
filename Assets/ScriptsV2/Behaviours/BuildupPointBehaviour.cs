@@ -22,7 +22,8 @@ namespace AlexaRun.Behaviours
         [SerializeField] private Stack<ItemBehaviour> itemStack = new Stack<ItemBehaviour>();
         [SerializeField] private PointAnimationDefinition animationDefinition = null;
         [SerializeField] private Animator animator = null;
-        [SerializeField] [ReadOnly] private float pointTimer = 0;
+        [SerializeField] private float buildupRate = 0f;
+        [SerializeField] [ReadOnly] private float pointTimer = 0f;
         [SerializeField] [ReadOnly] private EBehaviourState state = EBehaviourState.OK;
         [SerializeField] [ReadOnly] bool isEnabled = true;
 
@@ -57,6 +58,16 @@ namespace AlexaRun.Behaviours
 
         private void Awake() {
             if (stackPositionRoot == null) stackPositionRoot = transform;
+
+            // this could use more thought for sure
+            buildupRate = 1.0f / definition.baseAccumulationPerSecond;
+            buildupRate *= Settings.Persistent.DifficultyScale;
+
+            Settings.Persistent.SubscribeToValueChanges(() => {
+                buildupRate = 1.0f / definition.baseAccumulationPerSecond;
+                buildupRate *= Settings.Persistent.DifficultyScale;
+            });
+        
            // float speed = definition.baseAccumulationPerSecond / (1 / animationDefinition.baseAnimationCycleTime);
            // animator.SetFloat("speed", speed);
             initializeStackContent();
@@ -107,7 +118,7 @@ namespace AlexaRun.Behaviours
         private void pushItemToStack() {
             ItemBehaviour item;
             itemPool.SpawnFromPool(out item, definition.accumulatingItem.itemName);
-            item.SetSpriteLayer(Settings.instance.itemSortingLayer);
+            item.SetSpriteLayer(Settings.Constant.itemSortingLayer);
             item.SetSpriteLayerOrder(itemStack.Count + 1);
             item.transform.SetParent(stackPositionRoot);
             item.transform.localPosition = item.ItemDefinition.GenerateItemStackPosition(itemStack.Count, true);

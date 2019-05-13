@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using AlexaRun.ScriptableObjects;
+using AlexaRun.Global;
+using AlexaRun.Enums;
 
 namespace AlexaRun.Behaviours
 {
@@ -14,9 +16,16 @@ namespace AlexaRun.Behaviours
 
         private bool isPaused = false;
 
-        public void Awake() {
+        private void Awake() {
             if (settings == null) throw new UnityException(string.Format("SoundEffectBehaviour {0} is missing sound effect settings!", gameObject.name));
             if (audioSource == null) throw new UnityException(string.Format("SoundEffectBehaviour {0} is missing an audio source!", gameObject.name));
+
+            Settings.Persistent.SubscribeToValueChanges(updateFromSettings);
+        }
+
+        private void OnDestroy() {
+            if (audioSource && audioSource.isPlaying) audioSource.Stop();
+            if (Settings.Persistent) Settings.Persistent.UnsubscribeFromValueChanges(updateFromSettings);
         }
 
         public void PlaySound() {
@@ -27,9 +36,17 @@ namespace AlexaRun.Behaviours
                 audioSource.loop = settings.isLooping();
                 audioSource.pitch = settings.GetRandomPitch();
                 audioSource.clip = settings.GetRandomAudioClip();
-                audioSource.volume = settings.GetRandomVolume();
+                audioSource.volume = LimitVolume(settings.GetRandomVolume());
                 audioSource.Play();
             }       
+        }
+
+        public float LimitVolume(float volume) {
+            if (settings.getSoundEffectType() == ESoundEffectType.GENERAL) {
+                return Mathf.Clamp(volume, 0, Settings.Persistent.VolumeLevel_General);
+            } else {
+                return Mathf.Clamp(volume, 0, Settings.Persistent.VolumeLevel_Music);
+            }
         }
 
         public void PauseSound() {
@@ -39,6 +56,10 @@ namespace AlexaRun.Behaviours
 
         public void StopSound() {
             audioSource.Stop();
+        }
+
+        private void updateFromSettings() {
+            audioSource.volume = LimitVolume(audioSource.volume);
         }
     }
 }

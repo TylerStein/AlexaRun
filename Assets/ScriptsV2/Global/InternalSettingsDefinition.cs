@@ -2,8 +2,8 @@
 
 namespace AlexaRun.Global
 {
-    [CreateAssetMenu(fileName = "New Global Settings", menuName = "Alexa Run/Global Settings")]
-    public class SettingsDefinition : ScriptableObject
+    [CreateAssetMenu(fileName = "New Internal Settings", menuName = "Alexa Run/Internal Settings")]
+    public class InternalSettingsDefinition : ScriptableObject
     {
         [Header("Sprite Layers")]
         [SerializeField] public string backgroundSortingLayer = "Background";

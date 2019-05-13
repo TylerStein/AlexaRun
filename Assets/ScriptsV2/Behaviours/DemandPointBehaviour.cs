@@ -23,6 +23,7 @@ namespace AlexaRun.Behaviours
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
         [SerializeField] private PointAnimationDefinition animationDefinition = null;
         [SerializeField] private Animator animator = null;
+        [SerializeField] [ReadOnly] private float secondsPerChange = 0f;
         [SerializeField] [ReadOnly] private float pointTimer = 0f;
         [SerializeField] [ReadOnly] private EBehaviourState state = EBehaviourState.OK;
         [SerializeField] [ReadOnly] bool isEnabled = true;
@@ -64,10 +65,22 @@ namespace AlexaRun.Behaviours
 
         private void Awake() {
             if (stackPositionRoot == null) stackPositionRoot = transform;
-            float speed = definition.baseDepletionPerSecond / (1 / animationDefinition.baseAnimationCycleTime);
-            Debug.Log("Setting speed to " + speed, gameObject);
-            animator.SetFloat("speed", speed);
+            updateSpeed();
+
+            Settings.Persistent.SubscribeToValueChanges(updateSpeed);
+
             initializeStackContent();
+        }
+
+        private void updateSpeed() {
+            secondsPerChange = 1.0f / definition.baseDepletionPerSecond;
+            secondsPerChange /= Settings.Persistent.DifficultyScale;
+
+            float animationSpeed = animationDefinition.baseAnimationCycleTime / secondsPerChange;
+
+            animator.SetFloat("speed", animationSpeed);
+
+            Debug.Log("DemandPoint (DemandSpeed = " + secondsPerChange + ") (AnimSpeed = " + animationSpeed + ")", gameObject);
         }
 
         private void initializeStackContent() {
@@ -86,11 +99,10 @@ namespace AlexaRun.Behaviours
         private void updatePointBehaviour(float deltaTime) {
             if (state == EBehaviourState.FAILED || isEnabled == false) {
                 return;
-            } else if (state == EBehaviourState.OK) {
-                float timeTarget = 1.0f / definition.baseDepletionPerSecond;
+            } else if (state == EBehaviourState.OK) { 
                 pointTimer += deltaTime;
-                while (pointTimer >= timeTarget) {
-                    pointTimer -= timeTarget;
+                while (pointTimer >= secondsPerChange) {
+                    pointTimer -= secondsPerChange;
                     removeItemFromStack();
                 }
             } else if (state == EBehaviourState.FAILING) {
@@ -117,7 +129,7 @@ namespace AlexaRun.Behaviours
         }
 
         private void pushItemToStack(ItemBehaviour item) {
-            item.SetSpriteLayer(Settings.instance.itemSortingLayer);
+            item.SetSpriteLayer(Settings.Constant.itemSortingLayer);
             item.SetSpriteLayerOrder(itemStack.Count + 1);
             item.transform.SetParent(stackPositionRoot);
             item.transform.localPosition = item.ItemDefinition.GenerateItemStackPosition(itemStack.Count, true);

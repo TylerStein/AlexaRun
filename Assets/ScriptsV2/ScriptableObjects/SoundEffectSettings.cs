@@ -33,5 +33,9 @@ namespace AlexaRun.ScriptableObjects
         public bool isLooping() {
             return loop;
         }
+
+        public ESoundEffectType getSoundEffectType() {
+            return soundEffectType;
+        }
     }
 }
