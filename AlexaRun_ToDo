@@ -10,7 +10,6 @@ Try modifier point for its own sake
 > Score accumulation
 > Score display
 > Level failure
-> Better indicator of stack state (fill bar ticks?)
 
 ////////////
 
@@ -19,6 +18,15 @@ Pizza_Dude Base
 	5:06 Seconds
 	1 / 5.06 = 0.19
 	
+Pizza Demand Base
+	Depletion Per Second
+		0.38
+	
 Animation Speed comes form Variable
 
 ChangePerSecond = (1 / BaseAnimationTime) * Multiplier
+0.38 = (1 / 5.06) * M
+0.38 = 0.19M
+0.38 / 0.19 = M
+ChangesPerSecond / (1 / BaseAnimationTime) = M
+M = 2
