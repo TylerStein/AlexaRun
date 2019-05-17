@@ -24,6 +24,7 @@ namespace AlexaRun.Behaviours
         [SerializeField] private Animator animator = null;
         [SerializeField] private float buildupRate = 0f;
         [SerializeField] [ReadOnly] private float pointTimer = 0f;
+        [SerializeField] [ReadOnly] private float secondsPerChange = 0f;
         [SerializeField] [ReadOnly] private EBehaviourState state = EBehaviourState.OK;
         [SerializeField] [ReadOnly] bool isEnabled = true;
 
@@ -58,19 +59,22 @@ namespace AlexaRun.Behaviours
 
         private void Awake() {
             if (stackPositionRoot == null) stackPositionRoot = transform;
+            updateSpeed();
 
-            // this could use more thought for sure
-            buildupRate = 1.0f / definition.baseAccumulationPerSecond;
-            buildupRate *= Settings.Persistent.DifficultyScale;
+            Settings.Persistent.SubscribeToValueChanges(updateSpeed);
 
-            Settings.Persistent.SubscribeToValueChanges(() => {
-                buildupRate = 1.0f / definition.baseAccumulationPerSecond;
-                buildupRate *= Settings.Persistent.DifficultyScale;
-            });
-        
-           // float speed = definition.baseAccumulationPerSecond / (1 / animationDefinition.baseAnimationCycleTime);
-           // animator.SetFloat("speed", speed);
             initializeStackContent();
+        }
+
+        private void updateSpeed() {
+            secondsPerChange = 1.0f / definition.baseAccumulationPerSecond;
+            secondsPerChange /= Settings.Persistent.DifficultyScale;
+
+            float animationSpeed = animationDefinition.baseAnimationCycleTime / secondsPerChange;
+
+            animator.SetFloat("speed", animationSpeed);
+
+            Debug.Log("BuildupPoint (AccumulateSpeed = " + secondsPerChange + ") (AnimSpeed = " + animationSpeed + ")", gameObject);
         }
 
         private void initializeStackContent() {
@@ -86,10 +90,9 @@ namespace AlexaRun.Behaviours
             if (state == EBehaviourState.FAILED || isEnabled == false) {
                 return;
             } else if (state == EBehaviourState.OK) {
-                float timeTarget = 1.0f / definition.baseAccumulationPerSecond;
                 pointTimer += deltaTime;
-                while (pointTimer >= timeTarget) {
-                    pointTimer -= timeTarget;
+                while (pointTimer >= secondsPerChange) {
+                    pointTimer -= secondsPerChange;
                     pushItemToStack();
                 }
             } else if (state == EBehaviourState.FAILING) {
