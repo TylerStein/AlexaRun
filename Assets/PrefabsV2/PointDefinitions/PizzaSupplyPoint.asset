@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   suppliedItem: {fileID: 11400000, guid: 51d03d668c1bfdb40a0a6aee6a4465a0, type: 2}
   baseAccumulationPerSecond: 1
-  maxStackItemCount: 10
-  initialStackItemCount: 5
+  maxStackItemCount: 2
+  initialStackItemCount: 1
