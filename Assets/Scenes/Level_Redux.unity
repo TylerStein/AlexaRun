@@ -702,6 +702,7 @@ GameObject:
   - component: {fileID: 201059816}
   - component: {fileID: 201059815}
   - component: {fileID: 201059814}
+  - component: {fileID: 201059817}
   m_Layer: 0
   m_Name: SupplyPoint_Pizza
   m_TagString: InteractionPoint
@@ -723,6 +724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stackPositionRoot: {fileID: 201059816}
   itemPool: {fileID: 1468999725}
+  levelBehaviour: {fileID: 0}
   definition: {fileID: 11400000, guid: 7474ed76e03cdb846a7b24672edfce9b, type: 2}
   animationDefinition: {fileID: 11400000, guid: 33748b60186b5f542b11dd356e332344,
     type: 2}
@@ -770,6 +772,36 @@ Transform:
   m_Father: {fileID: 1998167405}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &201059817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201059813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed563897cc4db7346bd29e5b378875d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listenForState: 2
+  linkedBehaviour: {fileID: 1745454772}
+  onStateMatch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 201059814}
+        m_MethodName: SetEnabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &219666320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1066,7 @@ MonoBehaviour:
   animationDefinition: {fileID: 11400000, guid: dc36fb28e6ee8074d9ee3edec0ac9e5f,
     type: 2}
   animator: {fileID: 701676858}
+  levelBehaviour: {fileID: 0}
   secondsPerChange: 0
   pointTimer: 0
   state: 0
@@ -1869,7 +1902,8 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  definition: {fileID: 11400000, guid: 0793af7e3ee15ba4b893fd5b760d47ed, type: 2}
+  definition: {fileID: 11400000, guid: 626c481f3ffb9204395b34127f9786d2, type: 2}
+  levelBehaviour: {fileID: 0}
   disposalCooldownTimer: 0
   isEnabled: 1
 --- !u!114 &504466862
@@ -2318,7 +2352,7 @@ GameObject:
   - component: {fileID: 599755086}
   - component: {fileID: 599755085}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Pause_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3108,85 +3142,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &723631315
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 723631316}
-  - component: {fileID: 723631317}
-  m_Layer: 0
-  m_Name: Prop_BasketFront
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &723631316
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723631315}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: -2.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1452421890}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &723631317
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723631315}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1168107151
-  m_SortingLayer: 4
-  m_SortingOrder: 99
-  m_Sprite: {fileID: 21300000, guid: b33798c406ef69e45b3e1b3d6fc53561, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &728148635
 GameObject:
   m_ObjectHideFlags: 0
@@ -3434,6 +3389,7 @@ GameObject:
   - component: {fileID: 783831287}
   - component: {fileID: 783831291}
   - component: {fileID: 783831290}
+  - component: {fileID: 783831292}
   m_Layer: 0
   m_Name: SupplyPoint_Juice
   m_TagString: InteractionPoint
@@ -3482,8 +3438,8 @@ MonoBehaviour:
   stackPositionRoot: {fileID: 783831289}
   itemPool: {fileID: 1468999725}
   definition: {fileID: 11400000, guid: 69043be14bffec0469cba07c04e8a89b, type: 2}
+  levelBehaviour: {fileID: 0}
   isEnabled: 1
-  secondsPerChange: 0
   supplyPointCooldownTimer: 0
   OnSupply:
     m_PersistentCalls:
@@ -3525,11 +3481,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783831286}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: -1.4, z: 0}
+  m_LocalPosition: {x: 11.47, y: -1.4, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1452421890}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &783831290
 SpriteRenderer:
@@ -3597,6 +3553,36 @@ MonoBehaviour:
   - {fileID: -6026158435268871439, guid: e8e9ff56efdeda94b851f3be8c019a02, type: 3}
   activeSpriteIndex: 0
   spriteRenderer: {fileID: 783831290}
+--- !u!114 &783831292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783831286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed563897cc4db7346bd29e5b378875d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listenForState: 2
+  linkedBehaviour: {fileID: 300067074}
+  onStateMatch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783831288}
+        m_MethodName: SetEnabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &825097358
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,7 +3773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835359625}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.46, y: -1.68, z: 0}
+  m_LocalPosition: {x: -0.46000004, y: -1.68, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 552835737}
@@ -3960,85 +3946,6 @@ SpriteRenderer:
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 16, y: 8}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!1 &859050907
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 859050908}
-  - component: {fileID: 859050909}
-  m_Layer: 0
-  m_Name: Prop_BasketBack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &859050908
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859050907}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: -2.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1452421890}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &859050909
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859050907}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -462110361
-  m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1d7c9b13959421045883850cb92204a8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4926,7 +4833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172781592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 552835737}
@@ -5293,6 +5200,7 @@ MonoBehaviour:
   animationDefinition: {fileID: 11400000, guid: 5e6fbd2d91f2b0a40b35e71c81eb3f55,
     type: 2}
   animator: {fileID: 1826708393}
+  levelBehaviour: {fileID: 0}
   pointTimer: 0
   secondsPerChange: 0
   state: 0
@@ -5305,7 +5213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237774919}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: -2.5, z: 0}
+  m_LocalPosition: {x: -4, y: -2.215, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1452421890}
@@ -6118,9 +6026,8 @@ Transform:
   - {fileID: 761601477}
   - {fileID: 1237774921}
   - {fileID: 1826708392}
-  - {fileID: 859050908}
-  - {fileID: 723631316}
   - {fileID: 783831289}
+  - {fileID: 2074830980}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6136,6 +6043,7 @@ GameObject:
   - component: {fileID: 1468999725}
   - component: {fileID: 1468999727}
   - component: {fileID: 1468999729}
+  - component: {fileID: 1468999728}
   m_Layer: 0
   m_Name: Level_Redux
   m_TagString: LevelManager
@@ -6185,6 +6093,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSortingLayer: Entities
+--- !u!114 &1468999728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468999724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f97505f021fed41b1b6e6f5364e898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuRoot: {fileID: 599755083}
+  timeScale: 1
+  isPaused: 0
 --- !u!114 &1468999729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6206,6 +6129,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   levelState: 0
+  pauseBehaviour: {fileID: 1468999728}
   boundaries:
     minX: -18
     maxX: 34.2
@@ -6614,6 +6538,7 @@ MonoBehaviour:
   horizontalAxisName: Horizontal
   moveUpInputName: Up
   moveDownInputName: Down
+  pauseInputName: Cancel
 --- !u!114 &1531903064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7264,7 +7189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745454768}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -2.5, z: 0}
+  m_LocalPosition: {x: 2, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 552835737}
@@ -7304,6 +7229,7 @@ MonoBehaviour:
   animationDefinition: {fileID: 11400000, guid: 376caa2683f41be4fadbfd87fb8baf18,
     type: 2}
   animator: {fileID: 835359626}
+  levelBehaviour: {fileID: 0}
   secondsPerChange: 0
   pointTimer: 0
   state: 0
@@ -7606,7 +7532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826708391}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.85, y: -1, z: 0}
+  m_LocalPosition: {x: -0.85, y: -0.921, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1452421890}
@@ -8392,6 +8318,7 @@ MonoBehaviour:
   animationDefinition: {fileID: 11400000, guid: 9ebeebf1360efe941a50731ca4ab6984,
     type: 2}
   animator: {fileID: 295397352}
+  levelBehaviour: {fileID: 0}
   pointTimer: 0
   secondsPerChange: 0
   state: 0
@@ -8849,6 +8776,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   definition: {fileID: 11400000, guid: 9a4c89c061575874b9303ef9402854dd, type: 2}
+  levelBehaviour: {fileID: 0}
   disposalCooldownTimer: 0
   isEnabled: 1
 --- !u!114 &2070127338
@@ -8868,6 +8796,85 @@ MonoBehaviour:
   - {fileID: -2556001300664340683, guid: 88c7b2002c996a34193e150686a65050, type: 3}
   activeSpriteIndex: 0
   spriteRenderer: {fileID: 2070127334}
+--- !u!1 &2074830978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2074830980}
+  - component: {fileID: 2074830979}
+  m_Layer: 0
+  m_Name: cloth_holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &2074830979
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074830978}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 878872089
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 7b8e83e39d35a4f4b895ac69591beef6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &2074830980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074830978}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.42, y: -1.466, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.9, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1452421890}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2111201552
 GameObject:
   m_ObjectHideFlags: 0

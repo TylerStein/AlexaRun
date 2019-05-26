@@ -27,13 +27,18 @@ namespace AlexaRun.Behaviours.Player
         public UnityEvent OnFailedInteraction = new UnityEvent();
         public UnityEvent OnSuccessfulInteraction = new UnityEvent();
 
-        public void SetEnabled(bool enabled) {
-            animationController.SetGameOver(isEnabled == false);
+        public void SetGameOver() {
+            animationController.SetGameOver(true);
+            SetEnabled(false);
+        }
 
+        public void SetEnabled(bool enabled) {
             if (enabled == false) {
                 animationController.SetMovement(0);
                 soundEffectController.SetMovement(0);
                 animationController.UpdateAnimatorValues();
+            } else {
+                animationController.SetGameOver(false);
             }
 
             isEnabled = enabled;
@@ -58,18 +63,32 @@ namespace AlexaRun.Behaviours.Player
             item.SetSpriteLayer(Settings.Constant.heldSortingLayer);
             item.SetSpriteLayerOrder(itemStack.Count + 1);
             item.transform.parent = stackHoldRoot;
-            item.transform.localPosition = item.ItemDefinition.GenerateItemStackPosition(itemStack.Count, true);
+            item.transform.localPosition = GetNextStackPosition();// item.ItemDefinition.GenerateItemStackPosition(itemStack.Count, true);
             item.transform.localRotation = item.ItemDefinition.GenerateItemStackRotation(true);
             itemStack.Push(item);
             return true;
         }
 
+        public Vector3 GetNextStackPosition() {
+            Vector3 offset = Vector3.zero;
+            foreach (ItemBehaviour item in itemStack) {
+                offset = item.ItemDefinition.GenerateItemStackOffset(offset.y);
+            }
+            return offset;
+        }
+
         private void Awake() {
             if (stackHoldRoot == null) stackHoldRoot = transform;
             levelBehaviour = LevelBehaviour.Instance();
+            levelBehaviour.pauseBehaviour.SubscribeToPauseState((isPaused) => SetEnabled(isPaused));
         }
 
         private void Update() {
+            if (inputController.Pause) {
+                SetEnabled(false);
+                levelBehaviour.pauseBehaviour.TogglePause();
+            }
+
             if (isEnabled == false) return;
 
             if (inputController.Interact) {

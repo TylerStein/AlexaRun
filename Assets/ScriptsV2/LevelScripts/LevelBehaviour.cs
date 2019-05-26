@@ -16,6 +16,7 @@ namespace AlexaRun.Level
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
         [SerializeField] [ReadOnly] private EBehaviourState levelState = EBehaviourState.OK;
 
+        [SerializeField] public PauseBehaviour pauseBehaviour = null;
         [SerializeField] public LevelBoundaries boundaries;
         public LevelBoundaries Boundaries { get { return boundaries; } }
 

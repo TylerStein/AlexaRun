@@ -18,6 +18,12 @@ namespace AlexaRun.ScriptableObjects
             return offset;
         }
 
+        public Vector3 GenerateItemStackOffset(float baseHeight, bool horizontalShift = true) {
+            Vector3 offset = Vector3.up * (baseHeight + itemStackHeight);
+            if (horizontalShift) offset += Vector3.right * Random.Range(-maxHorizontalOffset, maxHorizontalOffset);
+            return offset;
+        }
+
         public Quaternion GenerateItemStackRotation(bool allowRotation = false) {
             if (allowRotation) {
                 return Quaternion.Euler(0, 0, Random.Range(-maxRotationalOffset, maxRotationalOffset));

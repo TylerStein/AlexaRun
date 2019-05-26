@@ -17,7 +17,7 @@ namespace AlexaRun.Global
             if (internalSettingsDefinition == null) throw new UnityException("Settings behaviour must have an InternalSettingsDefinition set!");
             if (persistentSettingsDefinition == null) throw new UnityException("Settings behaviour must have a PersistentSettingsDefinition set!");
 
-            Settings[] existingSettings = GameObject.FindObjectsOfType<Settings>();
+            Settings[] existingSettings = FindObjectsOfType<Settings>();
             for (int i = 0; i < existingSettings.Length; i++) {
                 if (existingSettings[i] != this) Destroy(existingSettings[i].gameObject);
             }

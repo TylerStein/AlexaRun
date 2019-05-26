@@ -15,6 +15,7 @@ namespace AlexaRun.Behaviours
     {
         [SerializeField] private Transform stackPositionRoot = null;
         [SerializeField] private ItemObjectPool itemPool = null;
+        [SerializeField] private LevelBehaviour levelBehaviour = null;
         [SerializeField] private AutoSupplyPointDefinition definition = null;
         [SerializeField] private PointAnimationDefinition animationDefinition = null;
         [SerializeField] private Animator animator = null;
@@ -34,7 +35,7 @@ namespace AlexaRun.Behaviours
 
         public override void SetEnabled(bool enabled) {
             isEnabled = enabled;
-            animator.SetInteger("state", enabled ? 1 : 0);
+            updateSpeed();
         }
 
         private void Update() {
@@ -45,15 +46,22 @@ namespace AlexaRun.Behaviours
             if (stackPositionRoot == null) stackPositionRoot = transform;
             updateSpeed();
             initializeStackContent();
+            levelBehaviour = LevelBehaviour.Instance();
+            levelBehaviour.pauseBehaviour.SubscribeToPauseState(SetEnabled);
         }
 
         private void updateSpeed() {
+            if (!isEnabled && levelBehaviour.pauseBehaviour.IsPaused) {
+                animator.SetFloat("speed", 0);
+                return;
+            }
+
             secondsPerChange = 1.0f / definition.baseAccumulationPerSecond;
             secondsPerChange /= Settings.Persistent.DifficultyScale;
 
             float animationSpeed = animationDefinition.baseAnimationCycleTime / secondsPerChange;
 
-            animator.SetInteger("state", enabled ? 1 : 0);
+            animator.SetInteger("state", isEnabled ? 1 : 0);
             animator.SetFloat("speed", animationSpeed);
 
             Debug.Log("SupplyPoint (SupplySpeed = " + secondsPerChange + ") (AnimSpeed = " + animationSpeed + ")", gameObject);

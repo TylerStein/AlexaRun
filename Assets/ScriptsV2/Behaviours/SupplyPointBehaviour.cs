@@ -4,7 +4,6 @@ using AlexaRun.ScriptableObjects;
 using AlexaRun.Interfaces;
 using AlexaRun.Behaviours.Player;
 using AlexaRun.Level;
-using AlexaRun.Global;
 
 namespace AlexaRun.Behaviours
 {
@@ -16,8 +15,8 @@ namespace AlexaRun.Behaviours
         [SerializeField] private Transform stackPositionRoot = null;
         [SerializeField] private ItemObjectPool itemPool = null;
         [SerializeField] private SupplyPointDefinition definition = null;
+        [SerializeField] private LevelBehaviour levelBehaviour = null;
         [SerializeField] [ReadOnly] private bool isEnabled = true;
-        [SerializeField] [ReadOnly] private float secondsPerChange = 0f;
         [SerializeField] [ReadOnly] private float supplyPointCooldownTimer = 0f;
 
         [SerializeField] public UnityEvent OnSupply = new UnityEvent();
@@ -42,6 +41,8 @@ namespace AlexaRun.Behaviours
 
         private void Awake() {
             if (stackPositionRoot == null) stackPositionRoot = transform;
+            levelBehaviour = LevelBehaviour.Instance();
+            levelBehaviour.pauseBehaviour.SubscribeToPauseState(SetEnabled);
         }
 
         private void updatePointBehaviour(float deltaTime) {

@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using AlexaRun.ScriptableObjects;
 using AlexaRun.Interfaces;
 using AlexaRun.Behaviours.Player;
+using AlexaRun.Level;
 
 namespace AlexaRun.Behaviours
 {
@@ -15,6 +16,7 @@ namespace AlexaRun.Behaviours
         [SerializeField] public UnityEvent OnAvailable = new UnityEvent();
 
         [SerializeField] private DisposalPointDefinition definition = null;
+        [SerializeField] private LevelBehaviour levelBehaviour = null;
         [SerializeField] [ReadOnly] private float disposalCooldownTimer = 0f;
         [SerializeField] [ReadOnly] private bool isEnabled = true;
 
@@ -34,6 +36,11 @@ namespace AlexaRun.Behaviours
 
         private void Update() {
             updatePointBehaviour(Time.deltaTime);
+        }
+
+        private void Awake() {
+            levelBehaviour = LevelBehaviour.Instance();
+            levelBehaviour.pauseBehaviour.SubscribeToPauseState(SetEnabled);
         }
 
         private void updatePointBehaviour(float deltaTime) {

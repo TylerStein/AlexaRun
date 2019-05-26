@@ -15,3 +15,4 @@ MonoBehaviour:
   allowedItems:
     items: []
   allowAll: 1
+  cooldown: 0.1

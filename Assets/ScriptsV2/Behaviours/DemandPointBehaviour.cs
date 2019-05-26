@@ -23,6 +23,7 @@ namespace AlexaRun.Behaviours
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
         [SerializeField] private PointAnimationDefinition animationDefinition = null;
         [SerializeField] private Animator animator = null;
+        [SerializeField] private LevelBehaviour levelBehaviour = null;
         [SerializeField] [ReadOnly] private float secondsPerChange = 0f;
         [SerializeField] [ReadOnly] private float pointTimer = 0f;
         [SerializeField] [ReadOnly] private EBehaviourState state = EBehaviourState.OK;
@@ -45,6 +46,7 @@ namespace AlexaRun.Behaviours
 
         public override void SetEnabled(bool enabled) {
             isEnabled = enabled;
+            updateSpeed();
         }
 
         public override void SubscribeToStateChange(UnityAction listener) {
@@ -70,9 +72,16 @@ namespace AlexaRun.Behaviours
             Settings.Persistent.SubscribeToValueChanges(updateSpeed);
 
             initializeStackContent();
+            levelBehaviour = LevelBehaviour.Instance();
+            levelBehaviour.pauseBehaviour.SubscribeToPauseState(SetEnabled);
         }
 
         private void updateSpeed() {
+            if (!isEnabled) {
+                animator.SetFloat("speed", 0);
+                return;
+            }
+
             secondsPerChange = 1.0f / definition.baseDepletionPerSecond;
             secondsPerChange /= Settings.Persistent.DifficultyScale;
 
