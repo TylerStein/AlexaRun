@@ -6,8 +6,6 @@ namespace AlexaRun.ScriptableObjects
     public class SupplyPointDefinition : ScriptableObject
     {
         public ItemDefinition suppliedItem;
-        public float baseAccumulationPerSecond = 1.0f;
-        public int maxStackItemCount = 10;
-        public int initialStackItemCount = 10;
+        public float cooldown = 0f;
     }
 }

@@ -15,5 +15,5 @@ MonoBehaviour:
   allowedItems:
     items:
     - {fileID: 11400000, guid: 1ea7aee40182d9a47b617c0e2740f203, type: 2}
-  allowAll: 1
-  cooldown: 1
+  allowAll: 0
+  cooldown: 0.2

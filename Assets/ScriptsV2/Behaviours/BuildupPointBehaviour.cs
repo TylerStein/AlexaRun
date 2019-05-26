@@ -22,7 +22,6 @@ namespace AlexaRun.Behaviours
         [SerializeField] private Stack<ItemBehaviour> itemStack = new Stack<ItemBehaviour>();
         [SerializeField] private PointAnimationDefinition animationDefinition = null;
         [SerializeField] private Animator animator = null;
-        [SerializeField] private float buildupRate = 0f;
         [SerializeField] [ReadOnly] private float pointTimer = 0f;
         [SerializeField] [ReadOnly] private float secondsPerChange = 0f;
         [SerializeField] [ReadOnly] private EBehaviourState state = EBehaviourState.OK;
@@ -99,7 +98,7 @@ namespace AlexaRun.Behaviours
                 pointTimer += Time.deltaTime;
                 if (pointTimer >= definition.baseFailStateTimeout) {
                     state = EBehaviourState.FAILED;
-                  //  animator.SetInteger("state", 2);
+                    animator.SetInteger("state", 2);
                     onStateChange.Invoke();
                 }
             }
@@ -111,7 +110,7 @@ namespace AlexaRun.Behaviours
             if (state == EBehaviourState.FAILING && itemStack.Count < definition.maxStackItemCount) {
                 state = EBehaviourState.OK;
                 pointTimer = 0;
-              //  animator.SetInteger("state", 0);
+                animator.SetInteger("state", 0);
                 onStateChange.Invoke();
             }
 
@@ -131,7 +130,7 @@ namespace AlexaRun.Behaviours
             if (state == EBehaviourState.OK && itemStack.Count >= definition.maxStackItemCount) {
                 state = EBehaviourState.FAILING;
                 pointTimer = 0;
-              //  animator.SetInteger("state", 1);
+                animator.SetInteger("state", 1);
                 onStateChange.Invoke();
             }
         }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: JuiceDemandPoint
   m_EditorClassIdentifier: 
   demandItem: {fileID: 11400000, guid: d0d5cd65c70726b4ebac8d97ff717fc3, type: 2}
-  baseDepletionPerSecond: 0.5
-  baseFailStateTimeout: 2
-  maxStackItems: 10
-  initialStackItemCount: 8
+  baseDepletionPerSecond: 0.3
+  baseFailStateTimeout: 10
+  maxStackItems: 6
+  initialStackItemCount: 5

@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d68c8a8aba8a68646a6ca231d6877c2d, type: 3}
+  m_Script: {fileID: 11500000, guid: d48b7a0801e59b74394b2b6f2b292ffa, type: 3}
   m_Name: JuiceSupplyPoint
   m_EditorClassIdentifier: 
   suppliedItem: {fileID: 11400000, guid: d0d5cd65c70726b4ebac8d97ff717fc3, type: 2}
-  baseAccumulationPerSecond: 1
-  maxStackItemCount: 10
-  initialStackItemCount: 10
+  cooldown: 0.2
