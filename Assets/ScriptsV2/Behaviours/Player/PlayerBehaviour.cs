@@ -28,6 +28,7 @@ namespace AlexaRun.Behaviours.Player
         public UnityEvent OnSuccessfulInteraction = new UnityEvent();
 
         public void SetGameOver() {
+            while (itemStack.Count > 0) PopItemStack();
             animationController.SetGameOver(true);
             SetEnabled(false);
         }

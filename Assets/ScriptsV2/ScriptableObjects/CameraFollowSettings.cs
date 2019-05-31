@@ -7,5 +7,6 @@ namespace AlexaRun.ScriptableObjects
     {
         public float HorizontalSpeed = 1.0f;
         public float VerticalSpeed = 1.0f;
+        public float ZoomSpeed = 1.0f;
     }
 }

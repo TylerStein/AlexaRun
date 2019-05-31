@@ -38,6 +38,7 @@ namespace AlexaRun.Behaviours
                 && item != null
                 && definition.demandItem == item.ItemDefinition) {
                 pushItemToStack(player.PopItemStack());
+                levelBehaviour.AddScore(1);
                 return true;
             }
 
@@ -46,7 +47,7 @@ namespace AlexaRun.Behaviours
 
         public override void SetEnabled(bool enabled) {
             isEnabled = enabled;
-            updateSpeed();
+            if (enabled == true) updateSpeed();
         }
 
         public override void SubscribeToStateChange(UnityAction listener) {
@@ -120,6 +121,7 @@ namespace AlexaRun.Behaviours
                     state = EBehaviourState.FAILED;
                     animator.SetInteger("state", 2);
                     onStateChange.Invoke();
+                    SetEnabled(false);
                 }
             }
         }

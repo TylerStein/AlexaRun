@@ -31,6 +31,7 @@ namespace AlexaRun.Behaviours
         public override bool OnInteract(PlayerBehaviour player) {
             if (isEnabled && player.HasStackSpace() && itemStack.Count > 0) {
                 player.PushItemStack(removeItemFromStack());
+                levelBehaviour.AddScore(1);
                 return true;
             }
 
@@ -39,7 +40,7 @@ namespace AlexaRun.Behaviours
 
         public override void SetEnabled(bool enabled) {
             isEnabled = enabled;
-            updateSpeed();
+            if (enabled == true) updateSpeed();
         }
 
         public override void SubscribeToStateChange(UnityAction listener) {
@@ -109,6 +110,7 @@ namespace AlexaRun.Behaviours
                     state = EBehaviourState.FAILED;
                     animator.SetInteger("state", 2);
                     onStateChange.Invoke();
+                    SetEnabled(false);
                 }
             }
         }
