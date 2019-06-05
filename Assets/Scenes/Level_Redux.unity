@@ -6212,6 +6212,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   levelState: 0
+  levelName: Level_Redux
   pauseBehaviour: {fileID: 1468999728}
   gameOverBehaviour: {fileID: 1468999730}
   boundaries:

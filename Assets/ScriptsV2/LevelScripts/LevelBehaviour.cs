@@ -13,9 +13,11 @@ namespace AlexaRun.Level
     {
         [SerializeField] private List<RoomBehaviour> roomBehaviours = new List<RoomBehaviour>();
         [SerializeField] private PlayerBehaviour playerBehaviour = null;
-        [SerializeField] private ScoreBehaviour scoreBehaviour = null;
+        [SerializeField] private ScoreController scoreBehaviour = null;
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
         [SerializeField] [ReadOnly] private EBehaviourState levelState = EBehaviourState.OK;
+
+        [SerializeField] private string levelName = "level";
 
         [SerializeField] public PauseBehaviour pauseBehaviour = null;
         [SerializeField] public GameOverBehaviour gameOverBehaviour = null;
@@ -52,6 +54,7 @@ namespace AlexaRun.Level
                 // All rooms failed
                 levelState = EBehaviourState.FAILED;
                 gameOverBehaviour.SetGameOver(playerBehaviour);
+                scoreBehaviour.StoreScore(levelName);
                 playerBehaviour.SetGameOver();
                 onStateChange.Invoke();
             }

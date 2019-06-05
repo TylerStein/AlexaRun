@@ -13,7 +13,7 @@ namespace AlexaRun.Behaviours.Player
     /// </summary>
     public class PlayerBehaviour : MonoBehaviour
     {
-        [SerializeField] private PlayerInputController inputController = null;
+        [SerializeField] private InputController inputController = null;
         [SerializeField] private PlayerPointProximityController proximityController = null;
         [SerializeField] private PlayerAnimationController animationController = null;
         [SerializeField] private PlayerSoundEffectController soundEffectController = null;
