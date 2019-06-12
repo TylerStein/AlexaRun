@@ -21,6 +21,7 @@ namespace AlexaRun.Behaviours.Player
         [SerializeField] private Stack<ItemBehaviour> itemStack = new Stack<ItemBehaviour>();
         [SerializeField] private Transform stackHoldRoot = null;
         [SerializeField] private LevelBehaviour levelBehaviour = null;
+        [SerializeField] [ReadOnly] private bool ignoreNextInteractionResult = false;
 
         private bool isEnabled = true;
 
@@ -53,6 +54,10 @@ namespace AlexaRun.Behaviours.Player
         public ItemBehaviour PopItemStack() {
             if (itemStack.Count == 0) return null;
             else return itemStack.Pop();
+        }
+
+        public void IgnoreNextInteractionResult() {
+            ignoreNextInteractionResult = true;
         }
 
         public bool HasStackSpace() {
@@ -96,9 +101,19 @@ namespace AlexaRun.Behaviours.Player
                 PointBehaviour nearestPoint = proximityController.NearestPoint;
                 if (nearestPoint != null) {
                     bool success = nearestPoint.OnInteract(this);
+                    if (ignoreNextInteractionResult) {
+                        ignoreNextInteractionResult = false;
+                        return;
+                    }
+
                     if (success) OnSuccessfulInteraction.Invoke();
                     else OnFailedInteraction.Invoke();
                 } else {
+                    if (ignoreNextInteractionResult) {
+                        ignoreNextInteractionResult = false;
+                        return;
+                    }
+
                     OnFailedInteraction.Invoke();
                 }
             }

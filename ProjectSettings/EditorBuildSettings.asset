@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_Redux.unity
     guid: ef72213ba62b368428839e80c2bdac18
+  - enabled: 1
+    path: Assets/Scenes/PostMenu_Redux.unity
+    guid: e5e1e31e80c0c614d82f33fdadabe476
   m_configObjects: {}

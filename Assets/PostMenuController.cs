@@ -17,7 +17,8 @@ namespace AlexaRun.Level
         [SerializeField] ScoreController scoreController;
 
         public void OnRestart() {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(restartLevelName));
+            // SceneManager.SetActiveScene(SceneManager.GetSceneByName(restartLevelName));
+            SceneManager.LoadScene(restartLevelName, LoadSceneMode.Single);
         }
 
         // Start is called before the first frame update

@@ -10,7 +10,7 @@ namespace AlexaRun.Level
         [SerializeField] private string mainSceneName;
 
         public void OnClickStart() {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(mainSceneName));
+            SceneManager.LoadScene(mainSceneName, LoadSceneMode.Single);
         }
 
         public void GoToCredits() {

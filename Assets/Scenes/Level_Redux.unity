@@ -6230,8 +6230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a272d65206dee4f9099e0596c1dcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  postGameLevelName: PostMenu_Redux
   gameOverOverlay: {fileID: 2132321295}
   cameraFollowBehaviour: {fileID: 1531903072}
+  inputController: {fileID: 1531903063}
   targetCameraSize: 4
 --- !u!114 &1468999731
 MonoBehaviour:
@@ -6654,6 +6656,7 @@ MonoBehaviour:
   moveUpInputName: Up
   moveDownInputName: Down
   pauseInputName: Cancel
+  altInteractInputName: Jump
 --- !u!114 &1531903064
 MonoBehaviour:
   m_ObjectHideFlags: 0

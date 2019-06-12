@@ -16,6 +16,7 @@ namespace AlexaRun.Behaviours
         public override bool OnInteract(PlayerBehaviour playerBehaviour) {
             playerBehaviour.gameObject.transform.SetPositionAndRotation(destination.transform.position, playerBehaviour.transform.rotation);
             teleportSoundEffect.PlaySound();
+            playerBehaviour.IgnoreNextInteractionResult();
             return true;
         }
 
