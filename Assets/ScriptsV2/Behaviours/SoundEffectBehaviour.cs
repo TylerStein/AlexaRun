@@ -59,7 +59,7 @@ namespace AlexaRun.Behaviours
         }
 
         private void updateFromSettings() {
-            audioSource.volume = LimitVolume(audioSource.volume);
+            audioSource.volume = LimitVolume(settings.GetRandomVolume());
         }
     }
 }

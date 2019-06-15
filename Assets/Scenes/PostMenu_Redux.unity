@@ -991,7 +991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d226fe41a4f53649b7485e61e00c4d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartLevelName: level_redux
+  restartLevelName: Level_Redux
   yourScoreText: {fileID: 1903404172}
   highScoreText: {fileID: 1335813320}
   inputController: {fileID: 1600676833}

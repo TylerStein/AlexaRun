@@ -29,23 +29,32 @@ namespace AlexaRun.Level
         public void UnsubscribeFromPauseState(UnityAction<bool> action) { onUpdatePlayState.RemoveListener(action); }
 
         // Start is called before the first frame update
-        void Start() {
+        void Awake() {
             timeScale = 1.0f;
             isPaused = false;
             pauseMenuRoot.SetActive(false);
         }
 
-        public void TogglePause() {
+        public void TogglePause(bool affectMenu = true) {
             if (isPaused) {
-                pauseMenuRoot.SetActive(false);
-                isPaused = false;
-                timeScale = 1f;
+                UnPause(affectMenu);
             } else {
-                pauseMenuRoot.SetActive(true);
-                isPaused = true;
-                timeScale = 0f;
+                Pause(affectMenu);
             }
             onUpdatePlayState.Invoke(!isPaused);
+        }
+
+        public void Pause(bool hideMenu = true) {
+            if (hideMenu) pauseMenuRoot.SetActive(true);
+            isPaused = true;
+            timeScale = 0f;
+        }
+
+        public void UnPause(bool hideMenu = true) {
+            if (hideMenu) pauseMenuRoot.SetActive(false);
+            isPaused = false;
+            timeScale = 1f;
+
         }
     }
 }

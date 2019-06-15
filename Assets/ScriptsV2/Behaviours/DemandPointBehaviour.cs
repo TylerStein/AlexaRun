@@ -47,7 +47,7 @@ namespace AlexaRun.Behaviours
 
         public override void SetEnabled(bool enabled) {
             isEnabled = enabled;
-            if (enabled == true) updateSpeed();
+            updateSpeed();
         }
 
         public override void SubscribeToStateChange(UnityAction listener) {

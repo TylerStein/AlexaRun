@@ -16,6 +16,7 @@ namespace AlexaRun.Level
         [SerializeField] private ScoreController scoreBehaviour = null;
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
         [SerializeField] [ReadOnly] private EBehaviourState levelState = EBehaviourState.OK;
+        [SerializeField] private SoundEffectBehaviour inGameAudioBehaviour = null;
 
         [SerializeField] private string levelName = "level";
 
@@ -42,6 +43,8 @@ namespace AlexaRun.Level
             for (int i = 0; i < roomBehaviours.Count; i++) {
                 roomBehaviours[i].SubscribeToStateChange(OnRoomStateChange);
             }
+
+            inGameAudioBehaviour.PlaySound();
         }
 
         private void OnRoomStateChange() {
@@ -53,6 +56,7 @@ namespace AlexaRun.Level
             if (failCount == roomBehaviours.Count) {
                 // All rooms failed
                 levelState = EBehaviourState.FAILED;
+                inGameAudioBehaviour.StopSound();
                 gameOverBehaviour.SetGameOver(playerBehaviour);
                 scoreBehaviour.StoreScore(levelName);
                 playerBehaviour.SetGameOver();

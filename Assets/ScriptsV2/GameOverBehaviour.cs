@@ -9,10 +9,11 @@ namespace AlexaRun.Behaviours
     public class GameOverBehaviour : MonoBehaviour
     {
         [SerializeField] private string postGameLevelName = "PostMenu_Redux";
-        [SerializeField] private GameObject gameOverOverlay;
-        [SerializeField] private CameraFollowBehaviour cameraFollowBehaviour;
-        [SerializeField] private InputController inputController;
+        [SerializeField] private GameObject gameOverOverlay = null;
+        [SerializeField] private CameraFollowBehaviour cameraFollowBehaviour = null;
+        [SerializeField] private InputController inputController = null;
         [SerializeField] private float targetCameraSize = 4f;
+        [SerializeField] private SoundEffectBehaviour gameOverAudioBehaviour = null;
 
         private void Start() {
             gameOverOverlay.SetActive(false);
@@ -29,6 +30,7 @@ namespace AlexaRun.Behaviours
             gameOverOverlay.SetActive(true);
             cameraFollowBehaviour.SetTarget(playerBehaviour.transform);
             cameraFollowBehaviour.SetOrthographicSize(targetCameraSize);
+            gameOverAudioBehaviour.PlaySound();
         }
     }
 }

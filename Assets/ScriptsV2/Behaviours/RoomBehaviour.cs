@@ -15,6 +15,7 @@ namespace AlexaRun.Behaviours
         [SerializeField] private UnityEvent onStateChange = new UnityEvent();
         [SerializeField] [ReadOnly] private EBehaviourState roomState = EBehaviourState.OK;
         [SerializeField] private SpriteFadeBehaviour roomFailingSpriteBehaviour = null;
+        [SerializeField] private SoundEffectBehaviour roomFailingSoundBehaviour = null;
 
         [SerializeField] [ReadOnly] private bool isEnabled = true;
 
@@ -55,22 +56,25 @@ namespace AlexaRun.Behaviours
                     failing = true;
                 } else if (pointState == EBehaviourState.FAILED) {
                     failCount++;
-                }
+                } 
             }
 
             if (failCount == trackedPoints.Count) {
                 // All points in room failed, kill room
+                roomFailingSoundBehaviour.StopSound();
                 roomState = EBehaviourState.FAILED;
                 roomFailingSpriteBehaviour.DisablePingPong();
                 roomFailingSpriteBehaviour.SetTargetAlpha(1);
                 onStateChange.Invoke();
             } else if (roomState == EBehaviourState.OK && failing) {
                 // Room became failing
+                roomFailingSoundBehaviour.PlaySound();
                 roomState = EBehaviourState.FAILING;
                 roomFailingSpriteBehaviour.EnablePingPong();
                 onStateChange.Invoke();
             } else if (roomState == EBehaviourState.FAILING && !failing) {
                 // Room was failing and is OK now
+                roomFailingSoundBehaviour.StopSound();
                 roomState = EBehaviourState.OK;
                 roomFailingSpriteBehaviour.DisablePingPong();
                 roomFailingSpriteBehaviour.SetTargetAlpha(0);
