@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using AlexaRun.Global;
 
 namespace AlexaRun.UIControllers
 {
-    public class SettingsViewController : MonoBehaviour
+    public class PauseMenuController : MonoBehaviour
     {
         [SerializeField] public Slider musicVolumeSlider = null;
         [SerializeField] public Slider generalVolumeSlider = null;
@@ -32,6 +33,14 @@ namespace AlexaRun.UIControllers
 
         public void UpdateDifficultyScale(float value) {
             if (Settings.Persistent) Settings.Persistent.DifficultyScale = value;
+        }
+
+        public void OnPressQuit() {
+            Application.Quit();
+        }
+
+        public void OnPressRestart() {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
         }
     }
 }
