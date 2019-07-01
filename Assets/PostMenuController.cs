@@ -11,10 +11,10 @@ namespace AlexaRun.Level
     public class PostMenuController : MonoBehaviour
     {
         [SerializeField] private string restartLevelName = "level";
-        [SerializeField] TextMeshProUGUI yourScoreText;
-        [SerializeField] TextMeshProUGUI highScoreText;
-        [SerializeField] InputController inputController;
-        [SerializeField] ScoreController scoreController;
+        [SerializeField] TextMeshProUGUI yourScoreText = null;
+        [SerializeField] TextMeshProUGUI highScoreText = null;
+        [SerializeField] InputController inputController = null;
+        [SerializeField] ScoreController scoreController = null;
 
         public void OnRestart() {
             // SceneManager.SetActiveScene(SceneManager.GetSceneByName(restartLevelName));

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ClothBuildupPoint
   m_EditorClassIdentifier: 
   accumulatingItem: {fileID: 11400000, guid: 1ea7aee40182d9a47b617c0e2740f203, type: 2}
-  initialStackItemCount: 3
+  initialStackItemCount: 1
   maxStackItemCount: 6
-  baseAccumulationPerSecond: 0.3
+  baseAccumulationPerSecond: 0.2
   baseFailStateTimeout: 10

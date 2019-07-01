@@ -5,9 +5,9 @@ namespace AlexaRun.Level
 {
     public class MainMenuBehaviour : MonoBehaviour
     {
-        [SerializeField] private GameObject creditsPanel;
-        [SerializeField] private GameObject mainPanel;
-        [SerializeField] private string mainSceneName;
+        [SerializeField] private GameObject creditsPanel = null;
+        [SerializeField] private GameObject mainPanel = null;
+        [SerializeField] private string mainSceneName = null;
 
         public void OnClickStart() {
             SceneManager.LoadScene(mainSceneName, LoadSceneMode.Single);

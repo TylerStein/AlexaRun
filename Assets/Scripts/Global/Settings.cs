@@ -11,7 +11,6 @@ namespace AlexaRun.Global
         public static PersistentSettingsDefinition Persistent;
 
         private void OnEnable() {
-            Debug.Log("PersistentSettings : OnEnable");
             DontDestroyOnLoad(gameObject);
 
             if (internalSettingsDefinition == null) throw new UnityException("Settings behaviour must have an InternalSettingsDefinition set!");

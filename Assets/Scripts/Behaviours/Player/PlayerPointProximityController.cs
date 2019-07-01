@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using AlexaRun.Level;
 
 using AlexaRun.Interfaces;
 namespace AlexaRun.Behaviours.Player
@@ -12,17 +13,25 @@ namespace AlexaRun.Behaviours.Player
     {
         [SerializeField] private string interactionPointTag = "InteractionPoint";
         [SerializeField] public PointBehaviour NearestPoint { get; private set; }
+        [SerializeField] private LevelBehaviour levelBehaviour;
 
         private void OnTriggerEnter2D(Collider2D collision) {
             if (collision.CompareTag(interactionPointTag)) {
                 PointBehaviour behaviour = collision.gameObject.GetComponent<PointBehaviour>();
-                if (behaviour != null) NearestPoint = behaviour;
+                if (behaviour != null) {
+                    NearestPoint = behaviour;
+                    levelBehaviour.ObjectHighlight.SetActive(true);
+                    levelBehaviour.ObjectHighlight.transform.SetPositionAndRotation(behaviour.transform.position, behaviour.transform.rotation);
+                }
             }
         }
 
         private void OnTriggerExit2D(Collider2D collision) {
             if (collision.CompareTag(interactionPointTag)) {
-                if (NearestPoint != null && collision.gameObject == NearestPoint.gameObject) NearestPoint = null;
+                if (NearestPoint != null && collision.gameObject == NearestPoint.gameObject) {
+                    levelBehaviour.ObjectHighlight.SetActive(false);
+                    NearestPoint = null;
+                }
             }
         }
     }

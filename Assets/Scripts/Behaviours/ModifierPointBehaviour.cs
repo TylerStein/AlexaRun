@@ -2,6 +2,7 @@
 using AlexaRun.ScriptableObjects;
 using AlexaRun.Behaviours.Player;
 using AlexaRun.Interfaces;
+using AlexaRun.Level;
 
 namespace AlexaRun.Behaviours
 {
@@ -10,7 +11,8 @@ namespace AlexaRun.Behaviours
     /// </summary>
     class ModifierPointBehaviour : PointBehaviour
     {
-        [SerializeField] private ModifierPointDefinition definition;
+        [SerializeField] private ModifierPointDefinition definition = null;
+        [SerializeField] private LevelBehaviour levelBehaviour = null;
         [SerializeField] [ReadOnly] bool isEnabled = true;
 
         public override bool OnInteract(PlayerBehaviour player) {

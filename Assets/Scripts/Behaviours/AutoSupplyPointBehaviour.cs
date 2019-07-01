@@ -20,6 +20,7 @@ namespace AlexaRun.Behaviours
         [SerializeField] private PointAnimationDefinition animationDefinition = null;
         [SerializeField] private Animator animator = null;
         [SerializeField] private Stack<ItemBehaviour> itemStack = new Stack<ItemBehaviour>();
+        [SerializeField] private Transform nearestHighlightParent;
         [SerializeField] [ReadOnly] private bool isEnabled = true;
         [SerializeField] [ReadOnly] private float secondsPerChange = 0f;
         [SerializeField] [ReadOnly] private float pointTimer = 0f;
@@ -63,8 +64,6 @@ namespace AlexaRun.Behaviours
 
             animator.SetInteger("state", isEnabled ? 1 : 0);
             animator.SetFloat("speed", animationSpeed);
-
-            Debug.Log("SupplyPoint (SupplySpeed = " + secondsPerChange + ") (AnimSpeed = " + animationSpeed + ")", gameObject);
         }
 
         private void updatePointBehaviour(float deltaTime) {

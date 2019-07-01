@@ -25,6 +25,9 @@ namespace AlexaRun.Level
         [SerializeField] public LevelBoundaries boundaries;
         public LevelBoundaries Boundaries { get { return boundaries; } }
 
+        [SerializeField] private GameObject objectHighlight = null;
+        public GameObject ObjectHighlight { get { return objectHighlight; } }
+
         private static LevelBehaviour levelBehaviourInstance = null;
         public static LevelBehaviour Instance() {
             return levelBehaviourInstance;

@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using AlexaRun.Interfaces;
 using AlexaRun.Behaviours.Player;
+using AlexaRun.Level;
 
 namespace AlexaRun.Behaviours
 {
@@ -11,6 +12,7 @@ namespace AlexaRun.Behaviours
         [SerializeField] private StairsTeleportBehaviour destination = null;
         [SerializeField] private SoundEffectBehaviour teleportSoundEffect = null;
         [SerializeField] private SpriteIndicatorBehaviour teleportSpriteIndicator = null;
+        [SerializeField] private LevelBehaviour levelBehaviour = null;
         [SerializeField] private string playerTag = "Player";
 
         public override bool OnInteract(PlayerBehaviour playerBehaviour) {

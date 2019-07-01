@@ -14,6 +14,7 @@ namespace AlexaRun.Global
         [SerializeField] public string heldSortingLayer = "Held";
         [SerializeField] public string foregroundSortingLayer = "Foreground";
         [SerializeField] public string uiSoringLayer = "UI";
-
+        [Header("Misc")]
+        [SerializeField] public Texture2D highlightTexture;
     }
 }

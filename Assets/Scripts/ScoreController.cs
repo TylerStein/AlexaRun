@@ -21,12 +21,10 @@ namespace AlexaRun.Level {
 
         public void SetDifficultyScoreModifier(float modifier = 1f) {
             difficultyScoreModifier = modifier;
-            Debug.Log("DifficultyScoreModifier Changed to " + modifier);
         }
 
         public void SetRoomScoreModifier(float modifier = 1f) {
             roomScoreModifier = modifier;
-            Debug.Log("RoomScoreModifier Changed to " + modifier);
         }
 
         public void IncrementScore(float baseAmount) {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SickBuildupPoint
   m_EditorClassIdentifier: 
   accumulatingItem: {fileID: 11400000, guid: 50b3d76c6d893e543a9a57da273f6b59, type: 2}
-  initialStackItemCount: 3
+  initialStackItemCount: 1
   maxStackItemCount: 6
-  baseAccumulationPerSecond: 0.3
+  baseAccumulationPerSecond: 0.2
   baseFailStateTimeout: 10
