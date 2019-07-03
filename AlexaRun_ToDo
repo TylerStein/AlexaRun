@@ -12,13 +12,13 @@ Points
 		Rate	0.3/s
 		F.Time	10 s
 		Max		6
-		Init	3
+		Init	1
 		
 	Tissue Buildup
 		Rate	0.3/s
 		F.Time	10 s
 		Max		6
-		Init	3
+		Init	1
 	
 	Juice Demand
 		Rate	0.3/s

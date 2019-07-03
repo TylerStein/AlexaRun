@@ -10,6 +10,7 @@ namespace AlexaRun.UIControllers
         [SerializeField] public Slider musicVolumeSlider = null;
         [SerializeField] public Slider generalVolumeSlider = null;
         [SerializeField] public Slider difficultyScaleSlider = null;
+        [SerializeField] public string mainMenuName = "MainMenu_Redux";
 
         private void OnDisable() {
             Settings.Persistent.StorePlayerPrefs();
@@ -51,7 +52,7 @@ namespace AlexaRun.UIControllers
         }
 
         public void OnPressQuit() {
-            Application.Quit();
+            SceneManager.LoadScene(mainMenuName, LoadSceneMode.Single);
         }
 
         public void OnPressRestart() {
